@@ -58,64 +58,56 @@ ul{
     margin:20px auto;
 }
 
-/* WORD OF THE DAY CARD */
-.word-card{
-    max-width:420px;
-    margin:20px auto 30px;
-    padding:24px;
-    border-radius:26px;
-    background-image:url('animal-border.png');
-    background-size:cover;
-    background-position:center;
-    box-shadow:0 12px 30px rgba(0,0,0,0.2);
-}
-
-.word-text{
-    font-size:26px;
-    color:#1aa6a6;
-    font-family:'Comic Sans MS', cursive;
-}
-
-/* SLIDESHOW */
-.slideshow{
-    max-width:600px;
+.gallery{
+    position:relative;
+    max-width:700px;
     margin:auto;
 }
-.slideshow img{
+.gallery img{
     width:100%;
     border-radius:20px;
+    display:none;
+}
+.gallery img.active{
+    display:block;
+}
+
+/* WORD OF THE DAY CARD */
+.word-card{
+    max-width:400px;
+    margin:20px auto;
+    padding:20px;
+    border:10px solid #f4c2c2;
+    border-radius:20px;
+    background:#fff5e6;
+    font-family:"Comic Sans MS", cursive;
+    color:teal;
+    font-size:22px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <img src="logo2.png" class="banner">
 <img src="banner.jpeg" class="banner">
 
+<!-- MOTTO -->
 <h1 style="color:#0b2a5b; font-weight:bold;">
 Learners Today, Leaders Tomorrow
 </h1>
 
-<p style="font-size:18px; font-style:italic; color:#0b2a5b; margin-top:-10px;">
+<p style="font-size:20px; font-style:italic; color:#0b2a5b; margin-top:-10px;">
 Nurturing Minds with Excellence and Faith
 </p>
 
-<h2 style="color:#0b2a5b;">Word of the Day</h2>
-
-<div class="word-card">
-    <div id="wordText" class="word-text"></div>
+<!-- WORD OF THE DAY -->
+<div class="word-card" id="wordCard">
+Word of the Day: Be kind, for God loves a cheerful heart 💙
 </div>
 
-<div>
-<img src="song.jpeg" style="width:90px; cursor:pointer;" onclick="toggleSong()">
-<p style="color:#0b2a5b;">Click to play school song</p>
-</div>
-
-<audio id="schoolSong">
-<source src="schoolsong.mp3" type="audio/mpeg">
-</audio>
-
+<!-- MAIN BUTTONS -->
 <button class="btn" onclick="showSection('mission')">Our Mission</button>
 <button class="btn" onclick="showSection('about')">About Us</button>
 <button class="btn" onclick="showSection('calendar')">Academic Calendar</button>
@@ -124,12 +116,14 @@ Nurturing Minds with Excellence and Faith
 <button class="btn" onclick="showSection('contact')">Contact Us</button>
 <button class="btn" onclick="showSection('felicia')">Felicia Foundation</button>
 
+<!-- MISSION -->
 <div id="mission" class="section">
 <p>
 Our mission is to provide a nurturing, faith-centered learning environment that equips children with strong academic foundations, moral values, and leadership skills for the future.
 </p>
 </div>
 
+<!-- ABOUT -->
 <div id="about" class="section">
 <p>
 Little Angels Academy is committed to holistic child development through academic excellence, strong values, and a supportive learning environment.
@@ -137,33 +131,40 @@ Little Angels Academy is committed to holistic child development through academi
 <img src="proprietor.jpeg" style="width:200px; border-radius:20px;">
 </div>
 
+<!-- ACADEMIC CALENDAR -->
 <div id="calendar" class="section">
 <h2>Academic Calendar</h2>
+
 <button class="btn" onclick="document.getElementById('calendarFrame').style.display='block'">
 2025–2026 Academic Calendar
 </button>
 
-<div id="calendarFrame" style="display:none;">
-<iframe src="calendar.pdf" width="100%" height="600"></iframe>
+<div id="calendarFrame" style="display:none; margin-top:20px;">
+<iframe src="calendar.pdf" width="100%" height="600" style="border:none;"></iframe>
 <br><br>
 <button class="btn" onclick="closeCalendar()">Close</button>
 </div>
 </div>
 
-<!-- ✅ SLIDESHOW GALLERY -->
+<!-- GALLERY SLIDESHOW -->
 <div id="gallery" class="section">
 <h2>School Gallery</h2>
 
-<div class="slideshow">
-<img id="slideImage" src="gallery1.jpeg">
+<div class="gallery">
+<img src="gallery1.jpeg" class="active">
+<img src="gallery2.jpeg">
+<img src="gallery3.jpeg">
+<img src="gallery4.jpeg">
+<img src="gallery5.jpeg">
+<img src="gallery6.jpeg">
+<img src="gallery7.jpeg">
+</div>
 </div>
 
-<button class="btn" onclick="prevSlide()">Previous</button>
-<button class="btn" onclick="nextSlide()">Next</button>
-</div>
-
+<!-- SCHOOL DAY -->
 <div id="schoolday" class="section">
 <h2>School Day Timetables</h2>
+
 <button class="btn" onclick="toggleClass('creche')">Creche</button>
 <button class="btn" onclick="toggleClass('n1')">Nursery 1</button>
 <button class="btn" onclick="toggleClass('n2')">Nursery 2</button>
@@ -171,105 +172,136 @@ Little Angels Academy is committed to holistic child development through academi
 <button class="btn" onclick="toggleClass('kg2')">KG 2</button>
 <button class="btn" onclick="toggleClass('b1')">B1</button>
 
-<div id="creche" class="section"><p>Creche timetable will be added here.</p></div>
-<div id="n1" class="section"><p>Nursery 1 timetable will be added here.</p></div>
-<div id="n2" class="section"><p>Nursery 2 timetable will be added here.</p></div>
-<div id="kg1" class="section"><p>KG 1 timetable will be added here.</p></div>
-<div id="kg2" class="section"><p>KG 2 timetable will be added here.</p></div>
-<div id="b1" class="section"><p>B1 timetable will be added here.</p></div>
+<div id="creche" class="section"><p>Creche timetable coming soon.</p></div>
+<div id="n1" class="section"><p>Nursery 1 timetable coming soon.</p></div>
+<div id="n2" class="section"><p>Nursery 2 timetable coming soon.</p></div>
+<div id="kg1" class="section"><p>KG 1 timetable coming soon.</p></div>
+<div id="kg2" class="section"><p>KG 2 timetable coming soon.</p></div>
+<div id="b1" class="section"><p>B1 timetable coming soon.</p></div>
 </div>
 
+<!-- CONTACT -->
 <div id="contact" class="section">
+
 <img src="email.png" style="width:90px; cursor:pointer;"
 onclick="document.getElementById('contactForm').style.display='block'">
 
-<div>
+<div style="margin-top:15px;">
 <a href="https://wa.me/233532023756">
 <img src="whatsapp.png" width="50">
 </a>
 <span>053 202 3756</span>
 </div>
 
-<div>
-<a href="https://www.ghanapostgps.com/map/" target="_blank">
+<div style="margin-top:15px;">
+<a href="https://www.ghanapostgps.com/map/">
 <img src="location.png" width="50">
 </a>
-<span>Ankaful Ramblers, Cape Coast Ghana – CC-206-1358</span>
+<span>Ankaful Ramblers, Cape Coast Ghana — CC-206-1358</span>
 </div>
 
-<div id="contactForm" style="display:none;">
+<div id="contactForm" style="display:none; margin-top:20px;">
 <form action="mailto:laacademyghana@gmail.com" method="post" enctype="text/plain">
 <input type="text" name="Name" placeholder="Name" required>
 <input type="text" name="ChildName" placeholder="Child's Name" required>
 <input type="text" name="Contact" placeholder="Contact Number" required>
 <textarea name="Message" placeholder="Message" required></textarea>
-<button class="btn">Send</button>
+<button class="btn" type="submit">Send</button>
 <button type="button" class="btn"
-onclick="document.getElementById('contactForm').style.display='none'">
-Close
-</button>
+onclick="document.getElementById('contactForm').style.display='none'">Close</button>
 </form>
 </div>
 </div>
 
-<p>Ankaful, Ramblers, Cape Coast, Ghana</p>
+<!-- FELICIA FOUNDATION -->
+<div id="felicia" class="section">
 
-<div>
-<a href="#"><img src="facebook.png" width="36"></a>
-<a href="#"><img src="youtube.png" width="36"></a>
+<img src="ffbanner.jpeg" class="banner">
+<img src="ffmotto.jpeg" class="banner">
+
+<div style="display:flex; gap:20px; flex-wrap:wrap; text-align:left;">
+<div style="flex:1;">
+<p>
+The Felicia Foundation was established in loving memory of Mrs. Felicia Blankson, a devoted educator and caregiver.
+</p>
+<p>
+The foundation supports education and child development in Ghana.
+</p>
 </div>
+<img src="felicia.jpeg" style="width:220px; border-radius:20px;">
+</div>
+
+<ul>
+<li>Teacher training</li>
+<li>Learning materials</li>
+<li>School feeding program</li>
+<li>Scholarships</li>
+<li>School bus</li>
+<li>Permanent school facility</li>
+</ul>
+
+<button class="btn"
+onclick="document.getElementById('ffForm').style.display='block'">
+Contact the Felicia Foundation
+</button>
+
+<div id="ffForm" style="display:none; margin-top:20px;">
+<form action="mailto:thefeliciafoundation@gmail.com" method="post" enctype="text/plain">
+<input type="text" name="Name" placeholder="Your Name" required>
+<textarea name="Message" placeholder="Your Message" required></textarea>
+<button class="btn" type="submit">Send</button>
+<button type="button" class="btn"
+onclick="document.getElementById('ffForm').style.display='none'">Close</button>
+</form>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<p>Ankaful, Ramblers, Cape Coast, Ghana</p>
+<a href="https://facebook.com"><img src="facebook.png" width="36"></a>
+<a href="https://youtube.com"><img src="youtube.png" width="36"></a>
 
 <script>
 function showSection(id){
-document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-document.getElementById(id).style.display='block';
+    document.querySelectorAll('.section').forEach(s => s.style.display='none');
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'block';
 }
 
 function closeCalendar(){
-document.getElementById('calendarFrame').style.display='none';
-document.getElementById('calendar').style.display='none';
+    const frame = document.getElementById('calendarFrame');
+    if(frame) frame.style.display = 'none';
 }
 
 function toggleClass(id){
-document.querySelectorAll('#schoolday .section').forEach(s=>s.style.display='none');
-document.getElementById(id).style.display='block';
+    document.querySelectorAll('#schoolday .section').forEach(s => s.style.display='none');
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'block';
 }
 
-let songPlaying=false;
-function toggleSong(){
-const s=document.getElementById("schoolSong");
-songPlaying?s.pause():s.play();
-songPlaying=!songPlaying;
-}
+/* Gallery slideshow */
+let slideIndex = 0;
+setInterval(() => {
+    const slides = document.querySelectorAll('.gallery img');
+    slides.forEach(img => img.classList.remove('active'));
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
+}, 3000);
 
-const words=[
-"Be kind, for everyone is fighting a battle.",
-"You are wonderfully made.",
-"Small steps lead to big dreams.",
-"Do everything with love.",
-"With God, all things are possible."
+/* Word of the Day rotation */
+const words = [
+"Be kind and loving to one another 💛",
+"With God, all things are possible ✨",
+"Do everything with love ❤️",
+"Let your light shine 🌟"
 ];
-document.getElementById("wordText").innerText=
-words[new Date().getDate()%words.length];
-
-/* SLIDESHOW SCRIPT */
-const slides=[
-"gallery1.jpeg","gallery2.jpeg","gallery3.jpeg",
-"gallery4.jpeg","gallery5.jpeg","gallery6.jpeg","gallery7.jpeg"
-];
-let slideIndex=0;
-function showSlide(){
-document.getElementById("slideImage").src=slides[slideIndex];
-}
-function nextSlide(){
-slideIndex=(slideIndex+1)%slides.length;
-showSlide();
-}
-function prevSlide(){
-slideIndex=(slideIndex-1+slides.length)%slides.length;
-showSlide();
-}
-setInterval(nextSlide,4000);
+let wordIndex = 0;
+setInterval(()=>{
+    document.getElementById('wordCard').innerText =
+        "Word of the Day: " + words[wordIndex];
+    wordIndex = (wordIndex + 1) % words.length;
+}, 6000);
 </script>
 
 </body>
