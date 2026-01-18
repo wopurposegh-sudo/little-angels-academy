@@ -1,308 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Little Angels Academy</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Little Angels Academy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-    margin:0;
-    background:#ffffff;
-    font-family:Verdana, sans-serif;
-    color:#1b1b1b;
-    text-align:center;
-}
+  <!-- Kindergarten Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 
-.banner{
-    width:100%;
-    max-width:1000px;
-    display:block;
-    margin:auto;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Neue', cursive;
+      background: #fdf6ff;
+      text-align: center;
+      color: navy;
+    }
 
-.section{
-    display:none;
-    max-width:900px;
-    margin:30px auto;
-    padding:20px;
-}
+    h1 {
+      margin-top: 30px;
+      font-size: 36px;
+    }
 
-.btn{
-    background:#0b2a5b;
-    color:white;
-    border:none;
-    border-radius:30px;
-    padding:12px 28px;
-    font-size:18px;
-    font-family:Verdana, sans-serif;
-    cursor:pointer;
-    margin:10px;
-}
+    /* WORD OF THE DAY CARD */
+    .word-card {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 25px;
+      background: white;
+      border-radius: 20px;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
 
-.btn:hover{ opacity:0.9; }
+    .word-card::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 24px;
+      background: linear-gradient(
+        120deg,
+        #ffd700,
+        #ff69b4,
+        #87cefa,
+        #ffd700
+      );
+      z-index: -1;
+      animation: sparkle 4s linear infinite;
+      background-size: 300% 300%;
+    }
 
-input, textarea{
-    width:100%;
-    padding:10px;
-    margin-bottom:10px;
-    border-radius:10px;
-    border:1px solid #ccc;
-    font-family:Verdana, sans-serif;
-    font-size:16px;
-}
+    @keyframes sparkle {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-ul{
-    text-align:left;
-    max-width:600px;
-    margin:20px auto;
-}
+    .word-title {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
 
-.gallery{
-    position:relative;
-    max-width:700px;
-    margin:auto;
-}
-.gallery img{
-    width:100%;
-    border-radius:20px;
-    display:none;
-}
-.gallery img.active{
-    display:block;
-}
+    .daily-word {
+      font-size: 42px;
+      margin: 15px 0;
+    }
 
-/* WORD OF THE DAY CARD */
-.word-card{
-    max-width:400px;
-    margin:20px auto;
-    padding:20px;
-    border:10px solid #f4c2c2;
-    border-radius:20px;
-    background:#fff5e6;
-    font-family:"Comic Sans MS", cursive;
-    color:teal;
-    font-size:22px;
-}
-</style>
+    .daily-quote {
+      font-size: 20px;
+      font-style: italic;
+    }
+
+    /* SCHOOL SONG */
+    .song-section {
+      margin: 50px auto;
+      padding: 25px;
+      max-width: 400px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .song-section h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .play-btn {
+      font-size: 22px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      background: navy;
+      color: white;
+      cursor: pointer;
+    }
+
+    .play-btn:hover {
+      background: #001f5f;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<img src="logo2.png" class="banner">
-<img src="banner.jpeg" class="banner">
+  <h1>Little Angels Academy</h1>
 
-<!-- MOTTO -->
-<h1 style="color:#0b2a5b; font-weight:bold;">
-Learners Today, Leaders Tomorrow
-</h1>
+  <!-- WORD OF THE DAY -->
+  <div class="word-card">
+    <div class="word-title">Word of the Day</div>
+    <div id="word" class="daily-word"></div>
+    <div id="quote" class="daily-quote"></div>
+  </div>
 
-<p style="font-size:20px; font-style:italic; color:#0b2a5b; margin-top:-10px;">
-Nurturing Minds with Excellence and Faith
-</p>
+  <!-- SCHOOL SONG -->
+  <div class="song-section">
+    <h2>🎵 School Song</h2>
+    <button class="play-btn" onclick="toggleSong()">Play / Pause</button>
+    <audio id="schoolSong">
+      <source src="school-song.mp3" type="audio/mpeg">
+      Your browser does not support audio.
+    </audio>
+  </div>
 
-<!-- WORD OF THE DAY -->
-<div class="word-card" id="wordCard">
-Word of the Day: Be kind, for God loves a cheerful heart 💙
-</div>
+  <script>
+    /* WORD OF THE DAY LOGIC */
+    const words = [
+      { word: "Kindness", quote: "Be kind whenever possible." },
+      { word: "Sharing", quote: "Sharing makes everyone happy." },
+      { word: "Respect", quote: "Treat others the way you want to be treated." },
+      { word: "Courage", quote: "Be brave and try new things." },
+      { word: "Gratitude", quote: "Say thank you and smile." },
+      { word: "Friendship", quote: "Friends make life brighter." },
+      { word: "Honesty", quote: "Always tell the truth." }
+    ];
 
-<!-- MAIN BUTTONS -->
-<button class="btn" onclick="showSection('mission')">Our Mission</button>
-<button class="btn" onclick="showSection('about')">About Us</button>
-<button class="btn" onclick="showSection('calendar')">Academic Calendar</button>
-<button class="btn" onclick="showSection('gallery')">Gallery</button>
-<button class="btn" onclick="showSection('schoolday')">School Day</button>
-<button class="btn" onclick="showSection('contact')">Contact Us</button>
-<button class="btn" onclick="showSection('felicia')">Felicia Foundation</button>
+    const today = new Date().toDateString();
+    const savedDate = localStorage.getItem("wordDate");
+    let daily;
 
-<!-- MISSION -->
-<div id="mission" class="section">
-<p>
-Our mission is to provide a nurturing, faith-centered learning environment that equips children with strong academic foundations, moral values, and leadership skills for the future.
-</p>
-</div>
+    if (savedDate !== today) {
+      daily = words[Math.floor(Math.random() * words.length)];
+      localStorage.setItem("wordData", JSON.stringify(daily));
+      localStorage.setItem("wordDate", today);
+    } else {
+      daily = JSON.parse(localStorage.getItem("wordData"));
+    }
 
-<!-- ABOUT -->
-<div id="about" class="section">
-<p>
-Little Angels Academy is committed to holistic child development through academic excellence, strong values, and a supportive learning environment.
-</p>
-<img src="proprietor.jpeg" style="width:200px; border-radius:20px;">
-</div>
+    document.getElementById("word").textContent = daily.word;
+    document.getElementById("quote").textContent = `"${daily.quote}"`;
 
-<!-- ACADEMIC CALENDAR -->
-<div id="calendar" class="section">
-<h2>Academic Calendar</h2>
+    /* SCHOOL SONG CONTROLS */
+    const song = document.getElementById("schoolSong");
 
-<button class="btn" onclick="document.getElementById('calendarFrame').style.display='block'">
-2025–2026 Academic Calendar
-</button>
-
-<div id="calendarFrame" style="display:none; margin-top:20px;">
-<iframe src="calendar.pdf" width="100%" height="600" style="border:none;"></iframe>
-<br><br>
-<button class="btn" onclick="closeCalendar()">Close</button>
-</div>
-</div>
-
-<!-- GALLERY SLIDESHOW -->
-<div id="gallery" class="section">
-<h2>School Gallery</h2>
-
-<div class="gallery">
-<img src="gallery1.jpeg" class="active">
-<img src="gallery2.jpeg">
-<img src="gallery3.jpeg">
-<img src="gallery4.jpeg">
-<img src="gallery5.jpeg">
-<img src="gallery6.jpeg">
-<img src="gallery7.jpeg">
-</div>
-</div>
-
-<!-- SCHOOL DAY -->
-<div id="schoolday" class="section">
-<h2>School Day Timetables</h2>
-
-<button class="btn" onclick="toggleClass('creche')">Creche</button>
-<button class="btn" onclick="toggleClass('n1')">Nursery 1</button>
-<button class="btn" onclick="toggleClass('n2')">Nursery 2</button>
-<button class="btn" onclick="toggleClass('kg1')">KG 1</button>
-<button class="btn" onclick="toggleClass('kg2')">KG 2</button>
-<button class="btn" onclick="toggleClass('b1')">B1</button>
-
-<div id="creche" class="section"><p>Creche timetable coming soon.</p></div>
-<div id="n1" class="section"><p>Nursery 1 timetable coming soon.</p></div>
-<div id="n2" class="section"><p>Nursery 2 timetable coming soon.</p></div>
-<div id="kg1" class="section"><p>KG 1 timetable coming soon.</p></div>
-<div id="kg2" class="section"><p>KG 2 timetable coming soon.</p></div>
-<div id="b1" class="section"><p>B1 timetable coming soon.</p></div>
-</div>
-
-<!-- CONTACT -->
-<div id="contact" class="section">
-
-<img src="email.png" style="width:90px; cursor:pointer;"
-onclick="document.getElementById('contactForm').style.display='block'">
-
-<div style="margin-top:15px;">
-<a href="https://wa.me/233532023756">
-<img src="whatsapp.png" width="50">
-</a>
-<span>053 202 3756</span>
-</div>
-
-<div style="margin-top:15px;">
-<a href="https://www.ghanapostgps.com/map/">
-<img src="location.png" width="50">
-</a>
-<span>Ankaful Ramblers, Cape Coast Ghana — CC-206-1358</span>
-</div>
-
-<div id="contactForm" style="display:none; margin-top:20px;">
-<form action="mailto:laacademyghana@gmail.com" method="post" enctype="text/plain">
-<input type="text" name="Name" placeholder="Name" required>
-<input type="text" name="ChildName" placeholder="Child's Name" required>
-<input type="text" name="Contact" placeholder="Contact Number" required>
-<textarea name="Message" placeholder="Message" required></textarea>
-<button class="btn" type="submit">Send</button>
-<button type="button" class="btn"
-onclick="document.getElementById('contactForm').style.display='none'">Close</button>
-</form>
-</div>
-</div>
-
-<!-- FELICIA FOUNDATION -->
-<div id="felicia" class="section">
-
-<img src="ffbanner.jpeg" class="banner">
-<img src="ffmotto.jpeg" class="banner">
-
-<div style="display:flex; gap:20px; flex-wrap:wrap; text-align:left;">
-<div style="flex:1;">
-<p>
-The Felicia Foundation was established in loving memory of Mrs. Felicia Blankson, a devoted educator and caregiver.
-</p>
-<p>
-The foundation supports education and child development in Ghana.
-</p>
-</div>
-<img src="felicia.jpeg" style="width:220px; border-radius:20px;">
-</div>
-
-<ul>
-<li>Teacher training</li>
-<li>Learning materials</li>
-<li>School feeding program</li>
-<li>Scholarships</li>
-<li>School bus</li>
-<li>Permanent school facility</li>
-</ul>
-
-<button class="btn"
-onclick="document.getElementById('ffForm').style.display='block'">
-Contact the Felicia Foundation
-</button>
-
-<div id="ffForm" style="display:none; margin-top:20px;">
-<form action="mailto:thefeliciafoundation@gmail.com" method="post" enctype="text/plain">
-<input type="text" name="Name" placeholder="Your Name" required>
-<textarea name="Message" placeholder="Your Message" required></textarea>
-<button class="btn" type="submit">Send</button>
-<button type="button" class="btn"
-onclick="document.getElementById('ffForm').style.display='none'">Close</button>
-</form>
-</div>
-
-</div>
-
-<!-- FOOTER -->
-<p>Ankaful, Ramblers, Cape Coast, Ghana</p>
-<a href="https://facebook.com"><img src="facebook.png" width="36"></a>
-<a href="https://youtube.com"><img src="youtube.png" width="36"></a>
-
-<script>
-function showSection(id){
-    document.querySelectorAll('.section').forEach(s => s.style.display='none');
-    const el = document.getElementById(id);
-    if(el) el.style.display = 'block';
-}
-
-function closeCalendar(){
-    const frame = document.getElementById('calendarFrame');
-    if(frame) frame.style.display = 'none';
-}
-
-function toggleClass(id){
-    document.querySelectorAll('#schoolday .section').forEach(s => s.style.display='none');
-    const el = document.getElementById(id);
-    if(el) el.style.display = 'block';
-}
-
-/* Gallery slideshow */
-let slideIndex = 0;
-setInterval(() => {
-    const slides = document.querySelectorAll('.gallery img');
-    slides.forEach(img => img.classList.remove('active'));
-    slideIndex = (slideIndex + 1) % slides.length;
-    slides[slideIndex].classList.add('active');
-}, 3000);
-
-/* Word of the Day rotation */
-const words = [
-"Be kind and loving to one another 💛",
-"With God, all things are possible ✨",
-"Do everything with love ❤️",
-"Let your light shine 🌟"
-];
-let wordIndex = 0;
-setInterval(()=>{
-    document.getElementById('wordCard').innerText =
-        "Word of the Day: " + words[wordIndex];
-    wordIndex = (wordIndex + 1) % words.length;
-}, 6000);
-</script>
+    function toggleSong() {
+      if (song.paused) {
+        song.play();
+      } else {
+        song.pause();
+      }
+    }
+  </script>
 
 </body>
 </html>
