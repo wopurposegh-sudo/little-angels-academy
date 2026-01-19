@@ -79,6 +79,19 @@ ul{
     flex-wrap:wrap;
     text-align:left;
 }
+.timeline{
+    max-width:800px;
+    margin:25px auto;
+    text-align:left;
+}
+.timeline-item{
+    display:flex;
+    gap:15px;
+    margin-bottom:18px;
+}
+.timeline-icon{
+    font-size:26px;
+}
 </style>
 </head>
 
@@ -113,19 +126,39 @@ Nurturing Minds with Excellence and Faith
 <button class="btn" onclick="showSection('contact')">Contact Us</button>
 <button class="btn" onclick="showSection('felicia')">Felicia Foundation</button>
 
+<!-- MISSION -->
 <div id="mission" class="section">
 <p>
-Our mission is to provide a nurturing, faith-centered learning environment that equips children with strong academic foundations, moral values, and leadership skills.
+To serve as a dynamic, inclusive, faith-centered learning community that fosters positive educational experiences and meaningful opportunities through strong partnerships among parents and guardians, teachers, and learners, while equipping every child with strong academic foundations, moral values, and leadership skills.
 </p>
 </div>
 
-<div id="about" class="section">
+<!-- ABOUT US -->
+<div id="about" class="section" style="text-align:left;">
+
+<h2>About Little Angels Academy</h2>
+
 <p>
-Little Angels Academy is committed to holistic child development through academic excellence and Christian values.
+Little Angels Academy is a growing educational institution located at Ankaful-Ramblers, Cape Coast, in the Central Region of Ghana. Founded on October 4, 2022, the school began with an in-house teacher training programme, laying a strong foundation for quality education. We officially welcomed our first students on October 7, 2024.
 </p>
-<img src="proprietor.jpeg" style="width:200px;border-radius:20px;">
+
+<p>
+Currently, Little Angels Academy offers classes from Creche to Basic 1, with plans to expand each academic year. Our curriculum is guided by the Ghana Education Service (GES) framework and thoughtfully enriched with elements of the UK Early Years Foundation Stage (EYFS), ensuring a well-rounded approach to early childhood development.
+</p>
+
+<p><strong>Our Vision</strong><br>
+To create an inclusive, creative, and nurturing learning environment where every child is empowered to thrive.
+</p>
+
+<p><strong>Our Mission</strong><br>
+To serve as a dynamic, inclusive, faith-centered learning community that fosters positive educational experiences and meaningful opportunities through strong partnerships among parents and guardians, teachers, and learners, while equipping every child with strong academic foundations, moral values, and leadership skills.
+</p>
+
+<img src="proprietor.jpeg" style="width:200px;border-radius:20px;margin-top:20px;">
+
 </div>
 
+<!-- CALENDAR -->
 <div id="calendar" class="section">
 <button class="btn" onclick="calendarFrame.style.display='block'">
 2025–2026 Academic Calendar
@@ -133,10 +166,11 @@ Little Angels Academy is committed to holistic child development through academi
 <div id="calendarFrame" style="display:none;margin-top:20px;">
 <iframe src="calendar.pdf" width="100%" height="600"></iframe>
 <br><br>
-<button class="btn" onclick="closeCalendar()">Close</button>
+<button class="btn" onclick="calendarFrame.style.display='none'">Close</button>
 </div>
 </div>
 
+<!-- GALLERY -->
 <div id="gallery" class="section">
 <div class="slideshow">
 <img id="slide" src="gallery1.jpeg">
@@ -146,30 +180,71 @@ Little Angels Academy is committed to holistic child development through academi
 <button class="btn" onclick="nextSlide()">Next</button>
 </div>
 
+<!-- SCHOOL DAY -->
 <div id="schoolday" class="section">
-<button class="btn" onclick="openClass('creche')">Creche</button>
-<button class="btn" onclick="openClass('n1')">Nursery 1</button>
-<button class="btn" onclick="openClass('n2')">Nursery 2</button>
-<button class="btn" onclick="openClass('kg1')">KG 1</button>
-<button class="btn" onclick="openClass('kg2')">KG 2</button>
-<button class="btn" onclick="openClass('b1')">B1</button>
 
-<div id="creche" class="section"><p>Creche timetable coming soon.</p></div>
-<div id="n1" class="section"><p>Nursery 1 timetable coming soon.</p></div>
-<div id="n2" class="section"><p>Nursery 2 timetable coming soon.</p></div>
-<div id="kg1" class="section"><p>KG 1 timetable coming soon.</p></div>
-<div id="kg2" class="section"><p>KG 2 timetable coming soon.</p></div>
-<div id="b1" class="section"><p>B1 timetable coming soon.</p></div>
+<p>
+The School Day at Little Angels Academy is thoughtfully structured to balance academic learning, personal development, and fun-filled activities.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<span class="timeline-icon">🍽️</span>
+<div><strong>Breakfast Club</strong><br>Breakfast support for early arrivals.</div>
 </div>
 
+<div class="timeline-item">
+<span class="timeline-icon">☀️</span>
+<div><strong>Sunshine Club</strong><br>Phonics, numeracy, reading, hygiene, and manners.</div>
+</div>
+
+<div class="timeline-item">
+<span class="timeline-icon">🎶</span>
+<div><strong>Morning Assembly</strong><br>Anthem, pledge, songs, and rhymes.</div>
+</div>
+
+<div class="timeline-item">
+<span class="timeline-icon">🍎</span>
+<div><strong>Morning Snack</strong><br>Healthy snacks and hydration.</div>
+</div>
+
+<div class="timeline-item">
+<span class="timeline-icon">🍛</span>
+<div><strong>Lunch Time</strong><br>Freshly prepared meals with allergy care.</div>
+</div>
+
+<div class="timeline-item">
+<span class="timeline-icon">🛝</span>
+<div><strong>Free Play</strong><br>Safe indoor and outdoor play.</div>
+</div>
+
+<div class="timeline-item">
+<span class="timeline-icon">📚</span>
+<div><strong>After School Club</strong><br>Homework support and activities.</div>
+</div>
+
+<div class="timeline-item">
+<span class="timeline-icon">🚌</span>
+<div><strong>School Excursions</strong><br>Termly educational trips.</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- CONTACT -->
 <div id="contact" class="section">
 
-<img src="email.png" style="width:90px;cursor:pointer;" onclick="contactForm.style.display='block'">
+<a href="mailto:laacademyghana@gmail.com">
+<img src="email.png" style="width:90px;">
+</a>
 
 <div style="margin-top:15px;">
 <a href="https://wa.me/233532023756">
 <img src="whatsapp.png" style="width:50px;">
 </a>
+<br>
 <span>053 202 3756</span>
 </div>
 
@@ -180,16 +255,6 @@ Little Angels Academy is committed to holistic child development through academi
 <p>Ankaful Ramblers, Cape Coast Ghana<br>GPS: CC-206-1358</p>
 </div>
 
-<div id="contactForm" style="display:none;">
-<form action="mailto:laacademyghana@gmail.com" method="post" enctype="text/plain">
-<input placeholder="Name" required>
-<input placeholder="Child's Name" required>
-<input placeholder="Contact Number" required>
-<textarea placeholder="Message" required></textarea>
-<button class="btn">Send</button>
-<button type="button" class="btn" onclick="contactForm.style.display='none'">Close</button>
-</form>
-</div>
 </div>
 
 <!-- FELICIA FOUNDATION -->
@@ -202,40 +267,25 @@ Little Angels Academy is committed to holistic child development through academi
 <div style="flex:1;">
 <p>
 The Felicia Foundation was established in loving memory of <strong>Mrs. Felicia Blankson</strong>,
-a devoted mother, educator, and caregiver who dedicated her life to nurturing young children.
-She served as a nursery teacher, Sunday School teacher, and later a home childminder.
-Her love for children and passion for education continue to inspire generations.
+a devoted mother, educator, and caregiver whose passion for children and education continues to inspire generations.
 </p>
 
 <p>
 The Foundation supports Little Angels Academy by strengthening educational opportunities
-and providing a positive learning environment for children in the Central Region of Ghana.
+and improving learning environments in the Central Region of Ghana.
 </p>
-</div>
-
-<img src="felicia.jpeg" style="width:220px;border-radius:20px;">
-</div>
 
 <ul>
-<li>Teacher training and educational resources</li>
+<li>Teacher training and professional development</li>
 <li>Teaching and learning materials</li>
 <li>Free healthy school feeding programme</li>
 <li>Scholarships for children in need</li>
 <li>Provision of a 15-seater school bus</li>
-<li>Permanent school facility in Nkontrodo, Cape Coast</li>
+<li>Permanent school facility in Cape Coast</li>
 </ul>
+</div>
 
-<button class="btn" onclick="ffForm.style.display='block'">
-Contact the Felicia Foundation
-</button>
-
-<div id="ffForm" style="display:none;">
-<form action="mailto:thefeliciafoundation@gmail.com" method="post" enctype="text/plain">
-<input placeholder="Your Name" required>
-<textarea placeholder="Your Message" required></textarea>
-<button class="btn">Send</button>
-<button type="button" class="btn" onclick="ffForm.style.display='none'">Close</button>
-</form>
+<img src="felicia.jpeg" style="width:220px;border-radius:20px;">
 </div>
 
 </div>
@@ -253,10 +303,6 @@ Contact the Felicia Foundation
 function showSection(id){
  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
  document.getElementById(id).style.display='block';
-}
-function closeCalendar(){
- calendarFrame.style.display='none';
- calendar.style.display='none';
 }
 const words=[
 "Be kind, for God loves a cheerful heart.",
@@ -276,11 +322,6 @@ const imgs=["gallery1.jpeg","gallery2.jpeg","gallery3.jpeg","gallery4.jpeg","gal
 let idx=0;
 function nextSlide(){idx=(idx+1)%imgs.length;slide.src=imgs[idx];}
 function prevSlide(){idx=(idx-1+imgs.length)%imgs.length;slide.src=imgs[idx];}
-
-function openClass(id){
- document.querySelectorAll('#schoolday .section').forEach(s=>s.style.display='none');
- document.getElementById(id).style.display='block';
-}
 </script>
 
 </body>
